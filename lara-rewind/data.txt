@@ -1,0 +1,116 @@
+Category::create([
+"name" => "Web Programming",
+"slug" => "web-programming"
+])
+
+Category::create([
+"name" => "Personal",
+"slug" => "personal"
+])
+
+Author::create([
+"name" => "Pahrurozi",
+"slug" => "pahrurozi"
+])
+
+Author::create([
+"name" => "Titin Yustika",
+"slug" => "titin-yustika"
+])
+
+Author::create([
+"name" => "Muhammad Zakaria",
+"slug" => "muhammad-zakaria"
+])
+
+Post::create([
+"title" => "Judul Post Pertama",
+"category_id" => 1,
+"author_id" => 1,
+"slug" => "judul-post-pertama",
+"excerpt" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illo odit, veritatis, eum blanditiis
+modi qui magni quae saepe magnam quasi eos. Voluptate nihil dolore nobis voluptates.",
+"body" => "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illo odit, veritatis, eum blanditiis
+    modi qui magni
+    quae saepe magnam quasi eos. Voluptate nihil dolore nobis voluptates harum enim illo perferendis laborum sit
+    blanditiis,
+    maxime fugit itaque a commodi recusandae impedit est provident laudantium veritatis nostrum illum minus!
+    Accusantium.</p>
+<p>
+    molestias optio saepe excepturi iusto exercitationem asperiores praesentium a aliquid? Rerum dolores in commodi
+    maxime
+    obcaecati id non architecto, ea doloremque, quibusdam error quos placeat eaque cum? Eos adipisci perspiciatis
+    voluptates
+    at voluptatum odit voluptatem soluta reprehenderit omnis aspernatur! Maiores excepturi nam sint laboriosam ipsa
+    adipisci
+    nisi ab! Hic, cum ipsum!</p>"
+])
+
+Post::create([
+"title" => "Judul Post Kedua",
+"category_id" => 2,
+"author_id" => 2,
+"slug" => "judul-post-kedua",
+"excerpt" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illo odit, veritatis, eum blanditiis
+modi qui magni quae saepe magnam quasi eos. Voluptate nihil dolore nobis voluptates.",
+"body" => "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illo odit, veritatis, eum blanditiis
+    modi qui magni
+    quae saepe magnam quasi eos. Voluptate nihil dolore nobis voluptates harum enim illo perferendis laborum sit
+    blanditiis,
+    maxime fugit itaque a commodi recusandae impedit est provident laudantium veritatis nostrum illum minus!
+    Accusantium.</p>
+<p>
+    molestias optio saepe excepturi iusto exercitationem asperiores praesentium a aliquid? Rerum dolores in commodi
+    maxime
+    obcaecati id non architecto, ea doloremque, quibusdam error quos placeat eaque cum? Eos adipisci perspiciatis
+    voluptates
+    at voluptatum odit voluptatem soluta reprehenderit omnis aspernatur! Maiores excepturi nam sint laboriosam ipsa
+    adipisci
+    nisi ab! Hic, cum ipsum!</p>"
+])
+
+Post::create([
+"title" => "Judul Post Ketiga",
+"category_id" => 1,
+"author_id" => 3,
+"slug" => "judul-post-ketiga",
+"excerpt" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illo odit, veritatis, eum blanditiis
+modi qui magni quae saepe magnam quasi eos. Voluptate nihil dolore nobis voluptates.",
+"body" => "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illo odit, veritatis, eum blanditiis
+    modi qui magni
+    quae saepe magnam quasi eos. Voluptate nihil dolore nobis voluptates harum enim illo perferendis laborum sit
+    blanditiis,
+    maxime fugit itaque a commodi recusandae impedit est provident laudantium veritatis nostrum illum minus!
+    Accusantium.</p>
+<p>
+    molestias optio saepe excepturi iusto exercitationem asperiores praesentium a aliquid? Rerum dolores in commodi
+    maxime
+    obcaecati id non architecto, ea doloremque, quibusdam error quos placeat eaque cum? Eos adipisci perspiciatis
+    voluptates
+    at voluptatum odit voluptatem soluta reprehenderit omnis aspernatur! Maiores excepturi nam sint laboriosam ipsa
+    adipisci
+    nisi ab! Hic, cum ipsum!</p>"
+])
+
+Post::create([
+"title" => "Judul Post Keempat",
+"category_id" => 1,
+"author_id" => 1,
+"slug" => "judul-post-keempat",
+"excerpt" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illo odit, veritatis, eum blanditiis
+modi qui magni quae saepe magnam quasi eos. Voluptate nihil dolore nobis voluptates.",
+"body" => "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illo odit, veritatis, eum blanditiis
+    modi qui magni
+    quae saepe magnam quasi eos. Voluptate nihil dolore nobis voluptates harum enim illo perferendis laborum sit
+    blanditiis,
+    maxime fugit itaque a commodi recusandae impedit est provident laudantium veritatis nostrum illum minus!
+    Accusantium.</p>
+<p>
+    molestias optio saepe excepturi iusto exercitationem asperiores praesentium a aliquid? Rerum dolores in commodi
+    maxime
+    obcaecati id non architecto, ea doloremque, quibusdam error quos placeat eaque cum? Eos adipisci perspiciatis
+    voluptates
+    at voluptatum odit voluptatem soluta reprehenderit omnis aspernatur! Maiores excepturi nam sint laboriosam ipsa
+    adipisci
+    nisi ab! Hic, cum ipsum!</p>"
+])

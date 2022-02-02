@@ -1,0 +1,647 @@
+1. Intro                         
+   1. Apa itu laravel ?
+     -> "laravel is a web application framework with expressive/melampaui, elegant/rapi syntax"
+   2. web application framework
+      -> sebuah kerangka yang di desain untuk mendukung pembangunan aplikasi web
+      -> menyediakan standar / cara untuk membangun aplikasi web
+      -> bertujuan untuk mengotomasi/otomatis hal hal umum yang biasanya di lakukan saat membangun aplikasi web
+      -> contohnya: database library(koneksi ke database, query ke database), templating engine(menampilkan data, memisahkan bagian bagian view), management, authentication, security, dll.
+   3. pembuat laravel 
+      -> Taylor Otwell
+      -> juni 2011
+      -> sebagai alternatif framework php selain codeigniter
+      -> versi terbarunya versi 8
+   4. filosofi laravel 
+      -> "we believe development must be an enjoyable, creative, experience to be truly fulfiling"
+   5. Tujuan laravel
+      -> laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality "Happy developer make the best code"
+   6. fitur utama laravel 
+      -> MVC (Model , View, Controller)
+      -> templating engine (costumization template view)
+      -> artisan console(bisa melakukan configurasi aplikasi laravel melalui artisan console)
+      -> Eloquent ORM/object relational mapping (memudahkan dalam berinteraksi dengan database yang Relationship)
+      -> authentication & Authorization (confirmation data user & permission access)
+      -> testing (laravel memungkinkan testing aplikasi)
+      -> packaging system (memudahkan pengguna mengelola paket dengan memasang, menghapus, melacak dependensi dan memperbaharui paket perangkat lunak secara otomatis)
+      -> multiple file system  
+      -> task scheduling
+      -> websocket programming
+   7. Ekosistem laravel
+      -> fitur fitur pada lingkungan laravel
+   8. website yang dibuat dengan laravel
+      -> awwwards.com/websites/laravel
+   9. pre requisite
+      -> php dasar
+      -> oop php
+      -> konsep MVC
+   10. Requirement
+      -> php 7.4/ 8
+      -> Mysql
+      -> composer 2
+      -> sequelPro / mysql Workbench
+      -> Terminal/PowerShell/GitBash
+      -> code editor
+      -> extension
+         -> php intelephense
+         -> laravel artisan
+         -> laravel snippets
+         -> laravel blade snippets
+         -> laravel blade spacer
+         -> laravel goTo view
+2. Instalasi & Konfigurasi
+   1. how to install laravel on linux, mac os and windows use composer based global
+   2. start laravel
+      -> php artisan serve (local development server)
+   3. how to usage laravel valet
+3. Struktur Folder, Routes & View
+   1. Intro
+   2. Struktur Folder
+      -> 10 Folder & 14 file
+      -> documentation -> instalation->directory struktur
+      -> MVC  
+         -> Model -> app->Models
+         -> View -> resources->views
+         -> Controller -> app->Http->Controllers
+      -> Folder lainnya
+         -> Route -> routes->web
+         -> Public (tempat file - file static)
+         -> .env (tempat environment/configurasi aplikasi laravel)
+   3. Routing
+      -> kostumisasisi halaman route 
+   4. View
+      -> kostumisasisi halaman views
+      -> add file css, js & img from public to views
+   5. Mengirim data ke view
+      -> send data from route to view with array associative and 
+   6. Penutup
+4. Blade Templating Engine
+   1. intro
+   2. Dokumentasi blade
+      -> documentation -> The basic->blade templates
+      -> {{ }} / blade
+      -> add bootstrap navbar to home page
+   3. layouting system
+      -> create folder layouts & partials on views
+         -> layouts
+            -> main.blade.php (halaman utama html)
+               -> @include navbar.blade.php from partials
+               -> @yield("container")
+         -> partials
+            -> navbar.blade.php (jika di butuhkan akan di panggil)
+      -> child view (home, about, posts)
+         -> home, about, posts -> @extends("layouts.main") & @section("container")
+      -> directive blade (yield, section, include, etc)
+      -> show title page & class active on directive blade page
+   4. simulasi posts posts
+      -> create data array associative ($blog_posts) from route posts & show to view posts
+      -> route posts -> "/blog" -> "posts" 
+      -> data of content array associative
+         -> title
+         -> slug
+         -> author
+         -> body
+      -> foreach data on posts page
+   5. single post
+      -> create tag a on title posts page with href="/posts/{{ $posts["slug"] }}"
+      -> create route single post -> "/posts/{slug}" -> "post"
+      -> create view post to single post 
+      -> create logic single post on route single post
+         -> move data array associative into route single post
+         -> logic : foreach data & show post based slug
+   6. penutup
+5. Model, Collection & Controller
+   1. intro
+   2. memperbaiki code video sebelumnya
+   3. membuat Model
+      -> Teori
+         -> documentation -> elegant ORM->get Started
+         -> model merupakan sebuah kelas yang mengelola tabel didalam database yang bisa kita petakan sehingga kita bisa memanipulasi tabel (CRUD)
+         -> fitur laravel -> Eloquent merupakan ORM -> membuat kita bisa berinteraksi dengan database
+         -> setiap tabel di dalam database mempunyai sebuah model 'agar kita bisa berinteraksi'
+         -> Model
+            -> php artisan make:model model-name
+         -> Migration (untuk membuat schema database dan membuat tabel nantinya)
+            -> php artisan make:model model-name --migration
+      -> Praktikum
+         -> create model post with : php artisan make:model Post
+         -> cut variabel $blog_posts->array associative from route /blog & /posts/{slug} and move to model post
+         -> modif variabel $blog_posts to variabel static and private ( private static $blog_posts = [] )
+         -> install extension vscode with name "PHP Namespace Resolver" for generate calling name resource
+         -> create function "public static all()" which return "self::$blog_posts"
+         -> call class Post in the method all on route "/blog" with: "Post::all()"
+         -> single post :
+            -> create method static function find with parameter $slug : "public static function find($slug)"
+            -> call static method $blog_posts and enter into variabel $posts
+            -> create variabel array $post []
+            -> foreach $posts and show data based slug
+            -> and return $post
+            -> call Post::find($slug) on route "/posts/{slug}" 
+   4. Collection di laravel
+      -> documentation -> Collection
+      -> Collection -> pembungkus array yang bisa membuat array menjadi bisa lebih baik untuk di memanipulasi
+      -> self -> property
+      -> static -> method
+      -> modif condition foreach and show based slug to firstWhere('slug', $slug)
+   5. membuat controller
+      -> documentation -> controller
+      -> controller / pengendali
+      -> route : Route::get('/', [UserController::class, 'show'])
+      -> how to make : php artisan make:controller controller-name
+      -> create controller with name: postController
+      -> create function index and show($slug)
+      -> cut begin return on route "/blog" and "/post/{slug}" and paste on function index and show class postController
+   6. penutup
+6. Database, Migration & Eloquent
+   1. intro
+   2. environment variabel
+      -> documentation -> environment configuration
+      -> file .env -> variabel sebenarnya
+      -> .env.example -> templatenya
+      -> configurasi db_connection on file .env
+      -> config->database.php -> untuk melihat default database
+   3. persiapan mysql
+      -> membuat nama database
+   4. migration
+      -> documentation -> migration
+      -> location folder -> database->migration
+      -> migration -> perintah untuk membuat tabel
+      -> perintah : "php artisan make:migration migration-name"
+      -> jika ada file migration, maka jalankan dengan : "php artisan migrate"
+      -> menjalankan perintah "php artisan migrate"
+      -> menjalankan perintah "php artisan migrate:rollback" -> untuk menghapus nama tabel pada folder migration database
+      -> menjalankan perintah "php artisan migrate:fresh" -> untuk menjalankan rollback dan migrate sekaligus yaitu pertama menghapus semua tabel dan menambahkannya kembali
+      -> menambahkan row user bukan admin dari migration 
+   5. Eloquent ORM
+      -> documentation -> Eloquent ORM
+      -> tabel migration di folder database saling berkaitan dengan 1 model
+      -> menjalankan : "php artisan tinker"
+      -> isi Model : $fillabel -> field - field mana saja yang boleh diisi
+      -> isi Model : $guarded -> field - field mana saja yang tidak boleh diisi
+      -> melakukan instansiasi class user with: "$user = new App\Models\User;" on tinker or "$user = new User"
+      -> melakukan penambahan row/user with: "$user->name = 'pahrurozi'", email & password with: "$user->password = bcript('12345')"
+      -> and save with with: "$user->save()"
+      -> manampilkan semua isi tabel with: "$user::all()"
+      -> menambahkan 1 user lagi
+      -> $user::fist() -> find user first
+      -> $user::find(2) -> find user by id
+      -> $user->findOrFail(2000) menampilkan pesan error jika tidak ada field dgn id 2000
+   6. penutup
+7. Post Model        
+   1. Intro
+   2. Membuat model post
+      -> rename model Post to Post_
+      -> create new post model with call "Post"
+      -> run "php artisan help make:model'
+      -> create model dan migration : "php artisan make:model -m name-model"
+      -> run "php artisan make:model Post"
+      -> jamak(seperti aslinya) / singular (diubah ditambhkan s)
+      -> add scema on table migration :
+         1. id()
+         2. string('title')
+         3. text('excerpt')
+         4. text('body')
+         5. timestamp('published_at')->nullable()
+         6. timestamps()
+      -> run "php artisan migrate:fresh"
+      -> or run "php artisan migrate" for run new column only
+      -> add data post on column migration to tinker:
+         1. title
+         2. excerpt
+         3. body
+      -> run Post::pluck('title') -> mengambil hanya judul
+      -> change post to notation object
+   3. blade escape character
+      -> add post with tag "p"
+      -> change {{  }} on post to {!!  !!}
+   4. mass assignment
+      -> add code "protected $fillable = ['title, 'excerpt', 'body']"
+      -> create mass assignment with :
+         Post::create([
+            'title' => 'dfdf',
+            'excerpt' => 'dfdf,
+            'body' => '<p>dfdfdfd</p>'
+         ])
+      -> change fillable to guarded and add post one more
+      -> run mass assignment update with : 
+         -> "Post::find(3)->update(['title' => 'Judul ketiga berubah])"
+         -> "Post::where('title', 'Judul ketiga berubah')->update(['excerpt', 'excerpt post 3 berubah'])
+   5. route model binding
+      -> documentation -> route model binding
+      -> change code route with: "/posts/{post}
+      -> change code parameter on controller with: "(Post $post)
+         -> ["post" => $post]
+      -> add column "slug" on table migration :
+         -> "string('slug')->unique()" -> tidak boleh sama dgn yg lain
+      -> run "php artisan migrate:fresh"
+      -> add slug only for "mass assignment" 
+         -> 'slug' => 'judul-pertama'
+      -> add 3 post
+      -> change code on posts page "/posts/$post->slug"
+      -> change code on route with : "/posts/{post:slug}"
+   6. penutup
+8. Post Category & Eloquent Relationship
+   1. intro
+   2. membuat Category
+      -> membuat model & migration with name: Category & code : "php artisan make:model -m Category"
+      -> add column migration "categories"
+         -> string('name')->unique()
+         -> string('slug')->unique()
+      -> add column on migration "posts"
+         -> foreignId('category_id')
+      -> run : php artisan migrate:fresh
+      -> add code $guarded on "model Category"
+      -> add data category on tinker use mass assignment or usually
+         -> name : web programming & personal
+         -> slug
+      -> add data posts with tinker use mass assignment & add 3 posts
+         -> title, category_id => 1, slug, excerpt, body
+      -> run : Post::where('category_id', 1)->get() on tinker
+   3. Eloquent Relationship
+      -> documentation -> Eloquent Relationship
+      -> model Relationship :
+         -> Category -> posts
+         -> Category -> 1 -> n => hasMany Posts
+         -> Posts -> 1 -> 1 => belongsTo Category
+         -> Category -> 1 -> 1 => hasOne Posts
+         -> Posts -> 1 -> n => belongsToMany Category
+
+         -> Posts -> User
+         -> Posts -> 1 -> 1 => belongsTo User
+         -> User -> 1 -> n => hasMany posts
+
+         -> Posts -> Comments <- User
+         -> Posts -> 1 -> n => hasMany Comments
+         -> Comments -> 1 -> 1 => belongsTo posts
+         -> Comments -> 1 -> 1 => belongsTo user
+         -> User -> 1 -> n => hasMany Comments
+   4. implementasi Relationship
+      -> create function Relationship Category on "Model Post"
+         -> public function category() {
+            return $this-> belongsTo(Category::class);
+         }
+      -> run on tinker : 
+         -> $post = Post::first()
+         -> $post->category
+      -> modif author with: {{ $post->category->name }}
+      -> bungkus "tag author" ke dalam "tag a" and href="/categories/{{ $post->category->slug }}"
+      -> create route model binding
+         -> "/categories/{category:slug} -> (Category $category)
+            -> "category" <- view
+               -> [
+                  "title" => $category->name,
+                  "posts" => $category->posts,
+                  "category" => $category->name
+               ]
+      -> create view: category
+         -> halaman : Post Category : {{ $category }}
+         -> foreach -> $posts as $post
+            -> "$post->title" with pembungkus tag a->"/posts/{{ $post->slug}}
+            -> excerpt : $post->excerpt
+      -> create function Relationship Posts on "Model Category"
+         -> public function posts() {
+            return $this-> hasMany(Post::class);
+         }
+   5. membuat halaman Category
+      -> create "route categories"
+         -> "/categories"
+            -> "categories"
+               -> [
+                  "title" => "Post Categories",
+                  "categories" => Category::all()
+               ]
+      -> create view: categories
+         -> halaman : Post Categories
+         -> foreach $categories as $category
+            -> h2><a->href="/categories/{{ $category->slug }}">{{ $category->name }}</a>
+   6. penutup
+9. Database Seeder
+   1. intro
+   2. menambahkan link author
+      -> add link author in "posts page" & link button "read more"
+   3. menambahkan relasi di table post
+      -> add column in "migration posts"
+         -> foreignId('user_id');
+   4. apa itu database seeding ?
+      -> documentation -> seeding
+      -> how to create : "php artisan make:seeder NameSeeder"
+      -> run seeder : 
+         -> php artisan db:seed
+         -> php artisan db:seed --class=UserSeed
+   5. membuat Seeder
+      -> activation comment factory in DatabaseSeeder.php & run : php artisan db:seed : untuk menjalankan "DatabaseSeeder"
+      -> run : php artisan migrate:fresh
+      -> add "data user, category & posts" in "DatabaseSeeder"
+      -> run : "php artisan db:seed"
+      -> run : "php artisan migrate:fresh --seed" untuk menjalankan seeder sekaligus
+   6. membuat halaman author
+      -> add tag a in "author"
+      -> add relational user in "model Post"
+      -> add relational posts in "model User"
+      -> add data "user, category, post" random
+      -> run : "php artisan migrate:fresh --seed"
+      -> add author in post page
+   7. Penutup
+10. Factory & Faker
+   1. intro
+   2. apa itu Factory ?
+      -> documentation -> Faktory
+      -> pabrik pembuat data
+      -> create : "php artisan make:factory PostFaktory"
+   3. apa itu Faker ?
+      -> fakerphp.github.io -> documentation
+   4. Mengubah Faker menjadi bahasa indonesia
+      -> file location -> "config->app.php->faker_locale => 'en_US'"
+         -> change from : faker_locale => 'en_US'
+            -> to : faker_locale => env('FAKER_LOCALE', 'en_US')
+      -> add code in "file .env"
+         -> "FAKER_LOCALE=id_ID"
+   5. Membuat data user menggunakan Faktory
+      -> comment User mass assignment & unComment "User::Factory"
+   6. Membuat Factory untuk Post
+      -> create Factory with: 
+         -> run : "php artisan make:faktory PostFactory"
+      -> penggabungan model, migration, seeder, faktory
+         -> "php artisan make:model Name -msf"
+      -> create faker in the method definition on PostFactory
+         -> [
+            'title' => $this->faker->sentence(mt_rand(2,8)),
+            'slug' => $this->faker->slug(),
+            'excerpt' => $this->faker->paragraph(),
+            'body' => $this->faker->paragraph(mt_rand(5, 10)),
+            'user_id' => mt_rand(1, 3),
+            'category_id' => mt_rand(1, 2)
+         ]
+   7. Menampilkan data Post dari yang paling baru
+      -> modify code on controller :
+         -> Posts::all() to Posts::latest()->get()
+   8. menampilkan post berdasarkan author
+      -> href author = "/authors/{{ $post->user->id }}"
+      -> create route :
+         -> "authors/{user}"
+            -> (User $user)
+               -> [
+                  'title' => 'user Post',
+                  'posts' => $user->posts
+               ]
+      -> create column migration User
+         -> string('username')->unique()
+      -> add user Facktory: username
+         -> 'username' => $this->faker->unique()->userName()
+      -> run: "php artisan migrate:fresh --seed"
+      -> modify route dan post: href posts to "username"
+      -> change consistensi: author
+         -> change to route: "/authors/{author:username}
+            -> (User $author)
+               -> ['posts' => $author->posts]
+      -> change method relation from user() to author()
+         -> and add parameter "return $this->belongsTo(User::class, 'user_id')"
+      -> change all user to author on posts & post
+   9. Penutup
+11. N+1 Problem
+   1. intro
+   2. Memperbaiki halaman category
+      -> set view category to view posts
+      -> Post by author & category
+   3. Apa itu N+1 problem ?
+      -> Query database berulang kali
+   4. Install library Clockwork
+      -> run : "composer require itsgoingd/clockwork"
+      -> install extension browser : "clockwork"
+   5. Eager loading
+      -> documentation : "Eager Loading"
+      -> how to use : "Post::with(['author', 'category'])->latest()->get()"
+   6. lazy Eager Loading
+      -> how to use : "$author->posts->load('category', 'author')"
+   7. Penutup
+12. Redesign UI 
+   1. Intro
+   2. Halaman yang akan diperbaiki
+      -> posts
+      -> post
+      -> categories
+   3. memperbaiki halaman posts
+      -> condition posts exists
+         -> @if ($posts->count())
+               -> posts
+            @else
+               -> not posts found
+            @endif
+   4. memindahkan eiger loading ke model
+      -> protected $with = ['author', 'category'];
+      -> delete with on PostController
+   5. membuat hero post
+      -> update to "$posts[0]->title", etc on hero card & to center
+      -> add create at : "$posts[0]->created_at->diffForHumans()"
+      -> set read more
+   6. menambahkan post image (unsplash api)
+      -> documentation : source.unsplash.com
+      -> https://source.unsplash.com/1200x400/?{{ $posts[0]->category->name }}
+   7. membuat card untuk post
+      -> @foreach ($posts->skip(1) as $post)
+      -> loop > .container.row.col-md-4 > .card > attr
+   8. menambahkan link ke post category
+      -> add category into card & add link tag a
+   9. memperbaiki halaman single post
+      -> .container>.row.justify-content-center
+      -> 'body' => collect($this->faker->paragraphs(mt_rand(5, 10)))->map(function ($p) {
+                return '<p>' . $p . '</p>';
+            })->implode(''), on posts
+      -> add web design to category
+      -> author by user in category
+   10. memperbaiki halaman categories
+      -> create card on categories
+      -> add attr
+   11. penutup
+13. Searching & Pagination
+   1. intro
+      -> Searching 
+      -> Pagination 
+
+      -> FLOW :
+         -> posts/postController/postModel
+
+   2. memperbaiki menu active
+      -> membuat variabel active on route
+   3. membuat form Searching
+      -> create form searching on posts
+      -> input on most top 
+      -> .row>.col-md-6>form-input
+      -> set attr input
+      -> set action="/posts" form
+   4. menambahkan query Searching
+      -> query on controller post
+      $posts = Post::latest();
+      if (request('search')) {
+         $posts->where('title', 'like', '%' . request('search') . '%')
+      } -> pencarian berdasarkan "title"
+      -> input > value={{ $request('search') }}
+      ----------------------------------------------
+      -> query on  controller post
+      if ($request('search')) {
+         $posts = where('title', 'like', '%' . $request('search') . '%')
+               ->orWhere('body', 'like', '%' . $request('search') . '%');
+      } -> pencarian berdasarkan title & body
+   5. query scope
+      -> query on model post
+      public function scopeFilter($query, array $filters) {
+         if (isset($filters['search']) ? $filters['search'] : false ) {
+            return $query->where('title' . '%' . $filters['search'] . '%')
+                  ->orWhere('body' . '%' . $filters['search'] . '%');
+         } -> pencarian berdasarkan title & body
+      }
+      -> call function on controller : 
+         -> Post::latest()->filter(request(['search']))->get()
+      ----------------------------------------------
+      -> query on model using when
+      public function scopeFilter($query, array $filters) {
+         $query->when($filters['search] ?? false, function($query, $search) {
+            return $query->where('title' . '%' . $search . '%')
+                  ->orWhere('body' . '%' . $search . '%');
+         }) -> pencarian berdasarkan title & body
+      }
+   6. query filter
+      -> query on model post
+      public function scopeFilter($query, array $filters) {
+         $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('title', '%' . $search . '%')
+                  ->orWhere('body', '%' . $search . '%');
+         });
+
+         $query->when($filters['category'] ?? false, function ($query, $category) {
+            return $query->whereHas('category', function($query) use ($category) {
+               $query->where('slug', $category);
+            });
+         });
+
+      }
+      -> call function on controller
+         -> Post::latest()->filter(request(['search', 'category']))->get()
+         -> "/categories/" to "/posts?category="
+         -> "/blog?category=web-programming"
+      -> search with url : "localhost:8000/posts?category=web-programming"
+      -> add form input type hidden on posts :
+         -> @if ($request('category'))
+            input -> type="hidden" name="category" value={{ request('category') }}
+         -> @endif
+      -> set url category on post:
+         -> "/categories/" to "/posts?category="
+      -> set search by author
+   7. memperbaiki halamaan posts
+      -> set url category on categories:
+         -> "/categories/" to "/posts?category="
+      -> set title page on PostController
+         $title = '';
+         if (request('category')) {
+            $category = Category::firstWhere('slug', request('slug'));
+            $title = $category->name;
+         }
+         -> same author
+      -> remove route post by author & category
+   8. membuat fitur Pagination
+      -> change get() to paginate(7) on PostController
+      -> add link Pagination on posts page with :
+         -> {{ $posts->links() }}
+      -> set useBootstrap for laravel on appServiceProvider.php
+         -> Paginator::useBootstrap();
+      -> add to PostController :
+         -> paginate(7)->withQueryString()
+   9. penutup
+14. View Login & Registration
+   1. Intro
+   2. Membuat view login
+      -> download all template bootstrap on page example bootstrap
+      -> add ul on navbar.blade.php
+         -> ul.navbar-nav.ms-auto>.nav-link>a[href="/login"].nav-link
+      -> add icon on button
+      -> create Login Controller
+         -> run : php artisan make:controller LoginController
+      -> LoginController::class
+         -> index()
+            -> view('login.index', [
+               'title' => 'login'
+            ])
+      -> route -> Route::get('/login', [LoginController::class, 'index'])
+      -> create view index on folder login
+      -> open template html login and copas "main" section
+      -> open template css login and copas .form-signin on style.css -> public
+      -> remove style .form-signin most top and replace with '.row>.col-md-5'
+      -> remove remember me, copyright
+      -> create link register
+         -> small>a[href="/register"].d-block.text-center.mt-3{Register Now}
+   3. Membuat view Registrasi
+      -> create registerController
+         -> run : php artisan make:controller registerController
+      -> index()
+         -> view('register.index', [
+               'title' => 'login'
+            ])
+      -> route -> Route::get('/register', [registerController::class, 'index'])
+      -> create view index on folder register
+      -> open login index.blade.php and copas "main" section
+      -> rename class .form-signin to .form-register
+      -> set attribute :
+         -> name, username, emai address, password
+      -> set rouded :
+         -> style : .form-Registration input > border-radius: 0; margin-bottom: -1px
+      -> botton{register} set .mt-3
+      -> rename link href="/login" {Already registered?}
+   4. Penutup
+15. User Registration            
+16. User Login & Middleware 
+17. Dashboard UI                 
+    1. intro                     
+    2. download template bootstrap                                  
+    3. menghapus controller dashboard                               
+    4. membuat dan mengubah view dashboard                          
+    5. mengubah view menjadi layout                                 
+    6. mengubah feather icon     
+    7. membuat halaman my posts (resource controller)               
+    8. memperbaiki menu yang active                                  
+    9. menampilkan data post berdasarkan user yang Login            
+    10. membuat halaman detail post                                 
+    11 penutup                   
+18. Create Post Form             
+19. Validation & Insert Post     
+    1. intro                     
+    2. Validasi form create      
+    3. Menampilkan pesan error   
+    4. Menampilkan inputan lama  
+    5. Menyimpan data ke tabel post                                 
+    6. Menampilkan pesan sukses  
+    7. memperbaiki bagian lain   
+    8. Fitur keamanan trix editor
+    9. Penutup                   
+20. Update & Delete Post         
+    1. intro                     
+    2. Membuat fitur delete      
+    3. Membuat halaman update    
+    4. Memperbaiki halamaan update                                  
+    5. Mengubah data             
+    6. Penutup                   
+21. Upload Image                 
+    1. intro                       
+    2. Membuat input file          
+    3. Cara kerja upload file      
+    4. Konfigurasi file storage    
+    5. Membuat field image di tabel post                              
+    6. Validasi image              
+    7. Menampilkan image pada post 
+    8. Penutup                     
+22. Preview, Update & Delete Image                                  
+    1. Membuat fitur preview image 
+    2. Update image                
+    3. delete image                
+    4. penutup                   
+23. Authorization                
+24. Upload Ke Web Hosting (GRATIS)                                  
+
+
+login :
+name : pahrurozi-posts
+pass : W6kGu#KHGn17EkZ(C6NE
+
+Database :
+dbname : laravel_posts => id17848192_laravel_posts
+dbuser : pahrurozidev => id17848192_pahrurozidev
+dbhost : localhost
+password : m!25V0tA}=)KK8R[

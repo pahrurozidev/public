@@ -1,0 +1,18 @@
+.jumbotron {
+  padding-top: 6rem;
+  background-color: #e2edff;
+}
+
+#galery {
+  background-color: #e2edff;
+}
+
+section {
+  padding-top: 5rem;
+}
+
+
+.rounded-circle {
+  width: 195px;
+  height: 200px;
+}

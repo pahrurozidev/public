@@ -1,0 +1,8 @@
+1. Model -> query & relations database 
+2. view -> halaman
+3. Controller -> kendali
+4. collection -> pembungkus array / query database
+5. migration -> table database
+6. routes -> url
+7. .env -> struktur kendali
+8. Eloquent ORM => intraksi dengan relasi database

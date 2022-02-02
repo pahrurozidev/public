@@ -1,0 +1,164 @@
+Bootstrap :
+1. Layout, Navbar, Header & Content
+    1. Membuat layout web
+        1. Layout halaman
+            1. sistem grid
+            2. layout halaman
+        2. navigator bar
+            1. menyiapkan navigator bar
+            2. menambahkan label
+            3. Membuat menu utama
+            4. Membuat sub menu
+            5. menambahkan tombol pada navbar
+        3. Header
+            1. membuat corousel
+            2. menambahkan gambar
+            3. menambahkan caption
+        4. Content
+            1. membuat container dan judul Content
+            2. membuat grid
+            3. membuat table
+2. Footer, Modal, Form Input & Responsive
+    1. Footer
+        1. menampilkan icon dan informasi pada navbar
+    2. Modal
+        1. memodifikasi tombol pada navbar
+        2. membuat kotak Modal
+        3. menambahkan judul Modal
+    3. Form Input
+        1. memodifikasi modal dan menyisipkan form Input
+    4. Responsive
+        1. halaman Responsive
+Laravel :
+1. sesi 1 : Pengenalan laravel
+    1. instalasi dan pengenalan laravel
+    2. Berkreasi dengan laravel
+        Memahami konsep MVC
+        Membuat : 
+            1. halaman utama
+            2. navbar
+            3. halaman info kegiatan
+            4. halaman data siswa
+2. Membuat aplikasi database
+    1. Database
+        -> koneksi database, membuat table otomatis
+            -> seeding => bisa mengisi otomatis table
+            -> "php artisan migrate" : untuk menjalankan table migration
+            -> "php artisan make:seeder UsersSeeder" : untuk membuat seeder "UsersSeeder"
+            -> "php artisan db:seed --class=UsersSeeder" : untuk menjalankan seeder class "UsersSeeder"
+    2. Membuat sistem login
+        -> instal sistem login & menghubungkan dengan database
+            -> tampilan halaman login & register
+            -> instal nodejsn
+            -> menginstal sistem login di laravel
+                -> "composer require laravel/ui"
+                -> "php artisan ui bootstrap --auth"
+                -> "npm install && npm run dev"
+                -> "php artisan serve"
+            -> memasang navbar login
+            -> tes login
+    3. Mengolah data
+        -> Membuat Crud data sistem
+            -> buat table "siswa" menggunakan fitur migration
+                -> "php artisan make:model Siswa"
+                -> "php artisan make:controller SiswaController --resource
+                    -> tambahan --resource akan membuat method :
+                        -> index
+                        -> create
+                        -> store
+                        -> show
+                        -> edit
+                        -> update
+                        -> destroy
+                -> "php artisan route:list" : untuk melihat url/route
+            -> Buat halaman utama data siswa
+            -> buat halaman detail siswa
+            -> buat halaman input data & proses tambah
+            -> buat halaman ubah data & proses ubah data
+            -> buat proses hapus data
+    4. Menghubungkan sistem login dan data siswa
+        -> Membedakan role admin & siswa, redirect halaman setelah login
+            -> mendaftarkan role di laravel
+                -> edit file : "app/Providers/AuthServiceProvider.php"
+                    -> Gate::define('isAdmin', function ($user) {
+                            return $user->role == "admin";
+                        });
+                    -> Gate::define('isSiswa', function ($user) {
+                            return $user->role == 'siswa';
+                        });
+                    -> Gate::define('isAdminSiswa', function ($user) {
+                            return $user->role == 'siswa' or 'admin';
+                        });
+            -> redirect halaman setelah login sebagai siswa dan admin
+            -> pembatasan akses untuk siswa
+            -> pembatasan tampilan untuk siswa
+
+Route :
+    1. beranda
+        -> "Route::get('/beranda', [MenuController::class, 'home']);"
+            -> Menampilkan Beranda Website
+    2. info kegiatan
+        -> "Route::get('/info-kegiatan', [MenuController::class, 'info_kegiatan']);"
+            -> Menampilkan info Kegiatan Siswa
+    3. data siswa
+        -> "Route::get('data-siswa', [MenuController::class, 'data_siswa']);"
+            -> Menampilkan Data siswa dalam table
+    4. all register
+        -> "Auth::routes();"
+    5. home
+        -> "Route::get('/home', [HomeController::class, 'index'])->name('home');"
+    6. siswa resource
+        -> "Route::resource('siswa', SiswaController::class);"
+            -> index
+                -> href : {{ route('siswa.index') }}
+                -> view('index', [
+                    "siswa" => Siswa::latest()->get()
+                ])
+                -> index : Menampilkan data siswa dalam tabel dengan fitur CRUDS
+            -> show
+                -> href : {{ route('siswa.show', $s->id) }}
+                -> view('profil_siswa', [
+                    "siswa" => Siswa::where('id', $id)->first()
+                ])
+                -> profil_siswa : Menampilkan detail siswa
+            -> create
+                -> href : {{ route('siswa.create') }}
+                -> view('form_tambah')
+            -> store
+                -> href : {{ route('siswa.store') }}
+                -> Siswa::create([
+                    'nama' => $request->nama,
+                    'nis' => $request->nis,
+                    'tgl_lahir' => $request->tgl_lahir
+                ])
+                -> return redirect()->route('siswa.index');
+            -> edit
+                -> href : {{ route('siswa.edit', $siswa->id) }}
+                -> form :
+                    -> @csrf
+                    -> @method(PUT)
+                    -> input : value="{{ $siswa->nama }}"
+                -> return view('form_ubah', [
+                    'siswa' => Siswa::find($id)
+                ])
+            -> update
+                -> href : {{ route('siswa.update', $siswa->id) }}
+                -> $siswa = Siswa::find($id)
+                -> $siswa->nama = $request->nama;
+                -> $siswa->nis = $request->nis;
+                -> $siswa->tgl_lahir = $request->tgl_lahir;
+                -> $siswa->save()
+                -> return redirect()->route('siswa.index');
+            -> destroy
+                -> href : {{ route('siswa.destroy', $siswa->id) }}
+                -> $siswa = Siswa::find($id)
+                -> $siswa->delete();
+                -> return redirect()->route('siswa.index')
+
+
+React js:
+1. frontend React
+    1. instalasi dan pengenalan React
+    2. membuat component
+    3. crud dalam React
+2. menghubungkan backend & frontend
