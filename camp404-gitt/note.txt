@@ -1,0 +1,9 @@
+1. instalasi dan configurasi git
+2. menambah file baru
+    1. working tree <- workspace
+    2. staging area <- git add 'file-name'
+    3. history <- git commit -m 'note'
+3. menambah file dari github
+4. menyelesaikan conflict
+3. cara kembali ke commit sebelumnya
+5. memisahkan environment
