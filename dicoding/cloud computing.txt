@@ -1,0 +1,29 @@
+1. Definis cloud computing
+cloud computing adalah sebuah proses pengolahan sistem daya komputasi, melalui jaringan 
+internet yang menghubungkan antara satu perangkat komputer dengan komputer lain, dalam 
+waktu yang sama.
+
+2. fungsi cloud computing
+a. mengingkatkan kapasitas penyimpanan data
+b. meningkatkan kinerja stackholders
+c. mendapatkan pembaruan sistem secara berkala (up to date)
+
+3. Jenis jenis cloud computing
+a. public cloud
+b. private cloud
+c. community cloud
+d. hybrid cloud
+
+4. Cara kerja cloud computing
+Untuk teknologi cloud computing sendiri menjadikan internet sebagai pusat server dalam 
+mengelola sebuah data. Sistem sangat memudahkan user dalam mendaftar dan masuk pada 
+aplikasi tanpa perlu menginstall -nya terlebih dahulu.
+Karena tidak memerlukan proses instalasi, maka penyimpanan dilakukan secara virtual. 
+Sehingga tidak membebani penggunaan memori pada perangkat komputer client. Kemudian, 
+kita dapat menjalankan berbagai perintah yang ada pada menu tampilan antarmuka dan 
+selanjutnya akan diproses oleh server aplikasi.
+
+5. Manfaat cloud computing
+a. sebagai media penyimpanan pada server secarea terpusat
+b. sebagai pusat keamanan data
+c. tahan lama dan tidak membutuhkan biaya yang besar

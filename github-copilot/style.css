@@ -1,0 +1,19 @@
+/* create card */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+/* create card-header */
+.card-header {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* creat card-body with background yellow */
+.card-body {
+  background-color: #f1f1f1;
+}

@@ -1,0 +1,36 @@
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil optio, impedit aspernatur illo nobis dolore! Tempora sed eos ea, eaque eius natus. Officia asperiores aliquid, quaerat iusto repellat eligendi tempora.
+1. Push
+Sesuai namanya push atau mendorong merupakan sebuah method di javascript yang berfungsi untuk menambahkan satu ataupun banyak nilai pada akhir array
+Misalnya : 
+const myArray = [1, 2];
+array.push(4)
+Nilai pada myArray akan di push satu angka yaitu 4 sehingga myArray sekarang akan mempunyai nilai myArray = [1, 2, 4]
+2. Pop
+method pop pada javascript berfungsi untuk mengambil nilai terakhir pada sebuah array
+Misalnya :<br/>
+const myArray = [1, 2, 4];<br/>
+const newArray = array.pop();<br/>
+
+Maka nilai myArray setelah dipop adalah [1, 2] dan newArray bernilai [4]
+3. Shift
+Sesuai namanya shift yang berarti menggeser merupakan kebalikan dari fungsi method pop yaitu mengambil nilai pertama pada sebuah array
+<br/>Misalnya : 
+const myArray = [1, 2, 4]<br/>
+const newArray = myArray.shift()<br/>
+
+Sekarang, setelah diberikan fungsi shift pada myArray maka myArray akan berisi nilai [2, 4] dan newArray akan bernilai [1]
+4. Unshift
+Method unshift berfungsi untuk menambahkan nilai pertama pada sebuah array
+<br/>Misalnya : 
+const myArray = [1, 2]<br/>
+myArray.unshift(4)<br/>
+Maka, setelah dijalankan fungsi unshift maka MyArray akan bernilai [4, 1, 2]
+
+Tambahan : 
+Manipulasi array pada javascript berfungsi untuk menambahkan ataupun menghapus elemen pertama dan terakhir pada array.
+Dan untuk menambah pemahaman dibuatkan sebuah tampilkan website untuk implementasi manipulasi array secara langsung pada laman berikut ini (https://pahrurozidev.github.io/manipulation-array/)
+
+
+
+
+

@@ -1,0 +1,6 @@
+1. Cloud Practitioner Essentials (Belajar Dasar AWS Cloud)
+2. Belajar Dasar Pemrograman JavaScript
+3. Belajar Membuat Aplikasi Back-End untuk Pemula
+4. Architecting on AWS (Membangun Arsitektur Cloud di AWS)
+5. Belajar Fundamental Aplikasi Back-End
+6. Menjadi Back-End Developer Expert

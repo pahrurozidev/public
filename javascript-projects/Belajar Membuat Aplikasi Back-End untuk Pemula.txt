@@ -1,0 +1,424 @@
+======= Belajar Membuat Aplikasi Back-End untuk Pemula ========
+1. Pendahuluan
+2. Pengenalan ke Back-End                                      (3 Jam) 
+3. Dasar-Dasar Node.js                                         (8 Jam) 
+4. Membangun Web Service menggunakan Node.js                   (10 Jam)
+5. Deploy Web Services                                         (5 Jam) 
+6. Mengonsumsi dan Menguji RESTful API menggunakan Postman     (5 Jam) 
+7. Penutup
+
+Rekomendasi Belajar :
+Hari ke-1	=> 5%       Selesai
+Hari ke-2	=> 10%      Selesai
+Hari ke-4	=> 15%      Selesai
+Hari ke-5	=> 20%      Selesai
+Hari ke-6	=> 25%      Selesai
+Hari ke-7	=> 32%      Selesai
+Hari ke-21	=> 61%
+Hari ke-28	=> 90%
+Hari ke-35	=> 100%
+
+1. Pendahuluan                                                  Selesai
+    1. Persetujuan Hak Cipta
+    2. Pendahuluan Kelas Back-End
+    3. Mekanisme Belajar
+    4. Forum Diskusi
+    5. Glosarium
+    6. Daftar Referensi	
+2. Pengenalan ke Back-End (3 Jam)                               Selesai
+    1. Apa itu Back-End
+    2. Server
+        Berikut beberapa tipe server sesuai dengan layanan yang baik untuk Anda ketahui.
+            1. File Server        : melayani penyimpanan dan pendistribusian berkas.
+            2. Application Server : melayani hosting sebuah program atau aplikasi.
+            3. DNS Server         : mengubah nama domain (contoh: dicoding.com) ke dalam bentuk IP Address (contoh: 75.2.21.170).
+            4. Web Server         : melayani hosting sebuah program atau aplikasi (seperti Application Server) yang dapat diakses oleh client melalui internet maupun intranet.
+            5. Database Server    : melayani penyimpanan dan pendistribusian data terstruktur.
+    3. Web Server dan Web Service
+        Jadi untuk membuat sistem aplikasi setidaknya membutuhkan:
+            1. Web Server : Server yang dapat menjalankan program dan dapat diakses melalui internet atau intranet. 
+            2. Web Service : Program yang dijalankan di web server agar kebutuhan bisnis terpenuhi.
+    4. Komunikasi Client-Server
+        Informasi pada request dapat mengandung
+            1. Request line : berisikan method/verb seperti 
+                1. GET (mengambil data)
+                2. POST (menambahkan/mengirim data)
+                3. PUT (memperbaharui data)
+                4. DELETE (menghapus data)
+                5. path atau alamat yang diminta
+                6. versi HTTP yang digunakan.
+            2. Header : memuat informasi yang dilampirkan terkait request seperti format dokumen (contoh application/json, text/html, dsb), kunci akses, dsb.
+            3. Body (opsional) : mengandung data yang dibutuhkan oleh server, bisa dalam bentuk teks, JSON, dll. Body tidak wajib dilampirkan bila server tidak membutuhkan data apapun.
+    5. Latihan Membuat Permintaan HTTP (HTTP Request)
+        1. Mendapatkan daftar kopi
+        curl -X GET https://coffee-api.dicoding.dev/coffees -i
+        Kita bedah kodenya yuk: 
+            - curl : merupakan perintah untuk menggunakan program cURL pada Terminal atau CMD.
+            - -X GET : menetapkan HTTP method/verb yang kita gunakan. GET berarti kita ingin mendapatkan sebuah data.
+            - https://coffee-api.dicoding.dev/coffees : merupakan alamat request yang dituju.
+            - -i : memberikan informasi detail terhadap response yang diberikan (HTTP response headers)
+        
+        Hasil :
+        HTTP/1.1 200 OK
+        Server: nginx/1.18.0 (Ubuntu)
+        Date: Sun, 02 Jan 2022 04:30:26 GMT
+        Content-Type: application/json; charset=utf-8
+        Content-Length: 188
+        Connection: keep-alive
+        content-security-policy: upgrade-insecure-requests
+        referrer-policy: strict-origin-when-cross-origin
+        x-frame-options: DENY
+        x-content-type-options: nosniff
+        x-xss-protection: 1; mode=block
+        vary: origin
+        access-control-expose-headers: WWW-Authenticate,Server-Authorization
+        cache-control: no-cache
+        accept-ranges: bytes
+        {
+            "message": "Berikut daftar kopi yang tersedia",
+            "coffees": [
+                {
+                    "id": 1,
+                    "name": "Kopi Tubruk",
+                    "price": 12000
+                },
+                {
+                    "id": 2,
+                    "name": "Kopi Tarik",
+                    "price": 15000
+                },
+                {
+                    "id": 3,
+                    "name": "Kopi Jawa",
+                    "price":18000
+                }
+            ]}
+
+        Mari kita bedah sekarang.
+            1. HTTP/1.1 : merupakan HTTP version yang digunakan oleh web server dalam menanggapi permintaan.
+            2. 200 : merupakan status code dari request. Karena status code diawali dengan angka 2, berarti request kita berhasil dilakukan.
+            3. OK : merupakan pesan teks dari status code, 200 berarti “OK”.
+            4. Content-Type: application/json; : merupakan tipe konten yang digunakan web server dalam memberikan data. Karena nilainya application/json, itu berarti server menggunakan format json.
+            5. JSON Data (kode di bagian bawah) : merupakan data yang diberikan oleh web server. Kita bisa melihat web server memberikan informasi kopi yang tersedia beserta harganya menggunakan format JSON.
+
+        2. Buat permintaan membeli kopi yang tersedia
+        curl -X POST -H "Content-Type: application/json" -d "{\"name\": \"Kopi Tubruk\"}" https://coffee-api.dicoding.dev/transactions -i
+
+        Mari kita bedah:
+            1. -X POST : dalam request kali ini kita menggunakan method POST. Karena membeli bukan hanya meminta data, tapi akan mengubah jumlah stok kopi yang ada. Selain itu kita juga melampirkan data berupa kopi apa yang akan dipesan. Sehingga tidak masuk akal bila kita menggunakan GET request.
+            2. -H “Content-Type: application/json” : Menetapkan nilai “Content-Type: application/json” pada Header request. Fungsinya untuk memberitahu server bahwa kita melampirkan data dalam bentuk JSON.
+            3. -d <JSON Content> : merupakan data yang dilampirkan pada request. Data ini berformat JSON dan memiliki informasi kopi apa yang ingin dipesan.
+            4. https://coffee-api.dicoding.dev/transactions : Merupakan alamat request yang dituju untuk membeli kopi.
+
+        Hasil :
+        HTTP/1.1 201 Created
+        Server: nginx/1.18.0 (Ubuntu)
+        Date: Sun, 02 Jan 2022 04:37:45 GMT
+        Content-Type: application/json; charset=utf-8
+        Content-Length: 46
+        Connection: keep-alive
+        content-security-policy: upgrade-insecure-requests
+        referrer-policy: strict-origin-when-cross-origin
+        x-frame-options: DENY
+        x-content-type-options: nosniff
+        x-xss-protection: 1; mode=block
+        vary: origin
+        access-control-expose-headers: WWW-Authenticate,Server-Authorization
+        cache-control: no-cache
+
+        {"message":"Pesanan berhasil!","success":true}
+
+        Result : "Pesanan kopi berhasil!"
+
+        3. Buat permintaan membeli kopi yang tidak tersedia
+        curl -X POST -H "Content-Type: application/json" -d "{\"name\": \"Kopi Luwak\"}" https://coffee-api.dicoding.dev/transactions -i
+
+        Hasil :
+            https://coffee-api.dicoding.dev/transactions -i
+            HTTP/1.1 404 Not Found
+            Server: nginx/1.18.0 (Ubuntu)
+            Date: Sun, 02 Jan 2022 04:51:24 GMT
+            Content-Type: application/json; charset=utf-8
+            Content-Length: 66
+            Connection: keep-alive
+            content-security-policy: upgrade-insecure-requests
+            referrer-policy: strict-origin-when-cross-origin
+            x-frame-options: DENY
+            x-content-type-options: nosniff
+            x-xss-protection: 1; mode=block
+            vary: origin
+            access-control-expose-headers: WWW-Authenticate,Server-Authorization
+            cache-control: no-cache
+            {"message":"Pesanan gagal, kopi tidak ditemukan!","success":false}
+    6. REST Web Service
+        Berikut beberapa sifat yang menjadi kunci pada REST API.
+            1. Client-Server : Ini merupakan hal yang paling mendasar dalam membangun REST API. Server harus bisa merespons permintaan yang dilakukan client, baik itu respons berhasil ataupun gagal. Komunikasi client dan server dilakukan melalui protokol HTTP.
+            2. Stateless : REST API tidak boleh menyimpan keadaan (state) apa pun terkait client. Seluruh state harus tetap disimpan di client. Artinya, tidak ada session di REST API. Permintaan yang dilakukan client harus mengandung informasi yang jelas. Jangan berharap RESTful API akan menyimpan informasi dari permintaan sebelumnya untuk digunakan di permintaan selanjutnya.
+            3. Cacheable : Agar dapat merespons permintaan dengan cepat, sebaiknya REST API menerapkan prinsip cache. Sehingga setiap permintaan tidak melulu mengambil dari database.
+            4. Layered : Ketika REST API server memiliki arsitektur yang kompleks, client seharusnya tidak perlu tahu bagaimana server melayaninya.
+        Ketika membangun REST API kita harus memperhatikan empat poin berikut:
+            1. Format request dan response.
+            2. HTTP Verbs/Methods.
+            3. HTTP Response code.
+            4. URL Design.
+    7. Format Request dan Response
+        Menggunakan format JSON untuk mengirim data
+    8. HTTP Verbs dan Response Code
+        Status code bernilai 3 digit angka. Pada REST API, berikut nilai-nilai status code yang sering digunakan:
+            200 (OK) - Permintaan client berhasil dijalankan oleh server.
+            201 (Created) - Server berhasil membuat/menambahkan resource yang diminta client.
+            400 (Bad Request) - Permintaan client gagal dijalankan karena proses validasi input dari client gagal.
+            401 (Unauthorized) - Permintaan client gagal dijalankan. Biasanya ini disebabkan karena pengguna belum melakukan    proses autentikasi.
+            403 (Forbidden) - Permintaan client gagal dijalankan karena ia tidak memiliki hak akses ke resource yang diminta.
+            404 (Not Found) - Permintaan client gagal dijalankan karena resource yang diminta tidak ditemukan.
+            500 (Internal Server Error) -  Permintaan client gagal dijalankan karena server mengalami eror (membangkitkan Exception).
+    9. URL Design
+        Standar dalam merancang endpoint/URL/Path
+            1. Gunakan Kata Benda daripada Kata Kerja pada Endpoint Path
+            2. Gunakan Kata Jamak pada Endpoint untuk Resource Collection
+            3. Gunakan Endpoint berantai untuk resource yang memiliki hirarki/relasi
+    10. Ikhtisar
+        1. Anda sudah mengetahui istilah Back-End dan Front-End Developer. 
+        2. Anda sudah mengetahui apa itu server.
+        3. Anda sudah mengetahui bagaimana server dan client berkomunikasi.
+        4. Anda sudah mencoba berkomunikasi dengan server melalui cURL sebagai client.
+        5. Anda sudah mengetahui apa itu web server dan web service.
+        6. Anda sudah mengetahui REST API sebagai salah satu arsitektur dalam membangun web service.
+        7. Anda sudah mengetahui format yang digunakan dalam tanggapan (respons) dan mengirimkan permintaan (request) pada arsitektur REST API.
+        8. Anda sudah mengetahui penggunaan dari HTTP verbs/method dari REST API.
+        9. Anda sudah mengetahui HTTP Response Code dan cara penggunaan code yang tepat.
+        10 Anda sudah mengetahui bagaimana mendesain URL pada REST API dengan baik.
+    11. Referensi
+3. Dasar-Dasar Node.js (8 Jam)                                  Selesai
+    1. Pendahuluan Dasar-Dasar Node.js untuk Back-End
+    2. Tools Belajar Dasar-Dasar Node.js untuk Back-End
+    3. Apa itu Node.js
+    4. Membuat Proyek Node.js
+    5. Menjalankan JavaScript Menggunakan Node.js
+    6. Node.js Global Object
+        window & object global
+            - Object.getOwnPropertyNames(global);
+            - global : Global namespace. Member apa pun di dalam object ini dapat diakses pada cakupan global.
+            - process : menyediakan interaksi dengan proses Node.js yang berjalan.
+            - console : menyediakan berbagai fungsionalitas STDIO.
+            - setTimeout, clearTimeout, setInterval, clearInterval.
+        pseudo-globals
+            - module : digunakan untuk sistem modularisasi pada Node.js.
+            - __filename : keyword untuk mendapatkan lokasi berkas JavaScript yang dieksekusi. Keyword ini tidak tersedia pada Node.js REPL.
+            - __dirname : keyword untuk mendapatkan root directory dari berkas JavaScript yang dieksekusi.
+            - require : digunakan untuk mengimpor module JavaScript.
+    7. Process Object
+        const initialMemoryUsage = process.memoryUsage().heapUsed;
+        const yourName = process.argv[2];
+        const environment = process.env.NODE_ENV;
+
+        for (let i = 0; i <= 10000; i++) {
+        // Proses looping ini akan membuat penggunaan memori naik
+        }
+
+        const currentMemoryUsage = process.memoryUsage().heapUsed;
+
+        console.log(`Hai, ${yourName}`);
+        console.log(`Mode environment: ${environment}`);
+        console.log(
+        `Penggunaan memori dari ${initialMemoryUsage} naik ke ${currentMemoryUsage}`
+        );
+
+        run : SET NODE_ENV=development && node ./process-object/index.js <Nama Anda> 
+    8. Modularization
+        Ada 3 jenis modul pada Node.js,
+            1. local module : module yang dibuat secara lokal berlokasi pada Node.js project Anda.
+            2. core module : module bawaan Node.js berlokasi di folder lib di mana Node.js terpasang pada komputer Anda. Core module dapat digunakan di mana saja.
+            3. third party module : module yang dipasang melalui Node Package Manager. Bila third party module dipasang secara lokal, maka modul akan disimpan pada folder node_modules di Node.js project Anda. Bila dipasang secara global, ia akan disimpan pada folder node_modules di lokasi Node.js dipasang.
+    9. Node Package Manager
+        const _ = require('lodash'); // TODO
+        const myOddEvenArray = _.partition([1, 2, 3, 4, 5, 6], (n) => n % 2);
+        console.log(myOddEvenArray);
+    10. Events
+        // TODO 1
+        const { EventEmitter } = require("events");
+
+        const birthday = (name) => {
+        console.log(`Happy birthday ${name}!`);
+        };
+
+        const umur = (age) => {
+        console.log(`Umur saya ${age}`);
+        };
+
+        const ProfileListener = ({ name, age }) => {
+        birthday(name);
+        umur(age);
+        };
+
+        // TODO 2
+        const myEventEmiter = new EventEmitter();
+
+        // TODO 3
+        myEventEmiter.on("birthday", ProfileListener);
+
+        // TODO 4
+        myEventEmiter.emit("birthday", { name: "dimas", age: 21 });
+    11. Filesystem
+        // TODO: tampilkan teks pada notes.txt pada console.
+        const fs = require("fs");
+
+        const readFile = fs.readFileSync("./filesystem/note.txt", "utf-8");
+        console.log(readFile);
+    12. Readable Stream
+        const fs = require("fs");
+        const readableStream = fs.createReadStream("./readable-stream/article.txt", {
+        highWaterMark: 10,
+        });
+
+        readableStream.on("readable", () => {
+        try {
+            process.stdout.write(`[${readableStream.read()}]`);
+        } catch (error) {
+            // catch the error when the chunk cannot be read.
+            console.log("error readable stream");
+        }
+        });
+
+        readableStream.on("end", () => {
+        console.log("Done");
+        });
+    13. Writeable Stream
+        const fs = require("fs");
+
+        const readableStream = fs.createReadStream("./writeable-stream/input.txt", {
+        highWaterMark: 15,
+        });
+
+        const writeableStream = fs.createWriteStream("./writeable-stream/output.txt");
+
+        readableStream.on("readable", () => {
+        try {
+            writeableStream.write(`${readableStream.read()} \n`);
+        } catch (error) {
+            console.log("Exception error");
+        }
+        });
+
+        readableStream.on("end", () => {
+        console.log("Done");
+        });
+    14. Ikhtisar
+        Anda sudah mengetahui apa itu Node.js.
+        Anda sudah mampu membuat proyek Node.js.
+        Anda sudah mengetahui cara menjalankan kode JavaScript melalui Node REPL maupun berkas JavaScript.
+        Anda sudah mengetahui apa itu global object pada Node.js
+        Anda sudah mengetahui fungsi dan mempraktikkan penggunaan process object.
+        Anda sudah mengetahui dan mempraktikkan teknik modularisasi pada Node.js.
+        Anda sudah mengetahui dan mempraktikkan events.
+        Anda sudah mengetahui dan mempraktikkan filesystem.
+        Anda sudah mengetahui dan mempraktikkan teknik stream.
+    15. Referensi
+4. Membangun Web Service menggunakan Node.js (10 Jam) 
+    1. Pendahuluan Membangun Web Service menggunakan Nodejs     Selesai
+    2. Membangun Web Server secara Native                       Selesai
+    3. Membuat HTTP Server                                      Selesai
+        Method listen() dapat menerima 4 parameter, berikut detailnya:
+            - port (number) : jalur yang digunakan untuk mengakses HTTP server.
+            - hostname (string) : nama domain yang digunakan oleh HTTP server.
+            - backlog (number) : maksimal koneksi yang dapat ditunda (pending) pada HTTP server.
+            - listeningListener (function) : callback yang akan terpanggil ketika HTTP server sedang bekerja (listening).
+        
+        source code :
+        const http = require("http");
+
+        const port = 5000;
+        const host = "localhost";
+
+        const requestListner = (request, response) => {
+        response.setHeader("Content-Type", "text/html");
+
+        response.statusCode = 200;
+        response.end("<h2>Hallo Http Server</h2>");
+        };
+
+        const server = http.createServer(requestListner);
+
+        server.listen(port, host, () => {
+        console.log(`Server berjalan pada http://${host}:${port}`);
+        });
+    4. Method/Verb Request                                      Selesai
+    5. Body Request                                             Selesai
+    6. Routing Request                                          Selesai
+    7. Response Status                                          Selesai
+        Respons yang dibawa oleh server dibagi menjadi tiga bagian penting. 
+            1. Yang pertama status line, atau bisa kita sebut response status; 
+            2. yang kedua response header; dan 
+            3. yang ketiga response body.
+        Status code haruslah bernilai 3 digit angka dengan ketentuan berikut:
+            - 100-199 : informational responses.
+            - 200 - 299 : successful responses.
+            - 300-399 : redirect.
+            - 400-499 : client error.
+            - 500-599 : server errors.
+    8. Response Header                                          Selesai
+    9. Response Body                                            Selesai
+    10. Web Framework                                           Selesai
+    11. Web Framework di Nodejs                                 Selesai
+    12. Membangun Web Server menggunakan Hapi                   Selesai
+    13. Membuat HTTP Server                                     Selesai
+    14. Method/Verb Request dan Routing                         Selesai
+    15. Path Parameter                                          Selesai
+    16. Query Parameters                                        Selesai
+    17. Body/Payload Request                                    Selesai
+    18. Response Toolkit                                        Selesai
+    19. Membangun RESTful API menggunakan Hapi                  Selesai
+    20. Menyiapkan Proyek                                       Selesai
+    21. ESLint                                                  Selesai
+    22. Kriteria Proyek                                         Selesai
+    23. Struktur Proyek                                         Selesai
+    24. Membuat HTTP Server                                     Selesai
+    25. Menyimpan Catatan                                       Selesai
+    26. Same-Origin Policy                                      Selesai
+    27. Menampilkan Catatan
+    28. Mengubah Catatan
+    29. Menghapus Catatan
+    30. Ikhtisar
+5. Deploy Web Services (5 Jam) 
+    1. Pendahuluan Deploy Web Services
+    2. Amazon Elastic Compute Cloud
+    3. Membuat Akun AWS
+    4. Identity and Access Management (IAM)
+    5. Membuat Akun IAM User
+    6. Membuat dan Menjalankan Amazon EC2 Instance
+    7. Mengoperasikan EC2 Instance Melalui SSH
+    8. Mengunggah Proyek Web Server ke Github
+    9. Memasang Git pada Komputer
+    10. Menginisialisasi Local Repository pada Proyek Web Server
+    11. Mendaftar Akun Github untuk Mengunggah Local Repository
+    12. Membuat Remote Repository
+    13. Menghubungkan Local Repository dengan Remote Repository
+    14. Mengonfigurasi Kebutuhan pada EC2 Instances - Mengunduh Repository
+    15. Memasang Node.js dan Menjalankan Web Server di EC2 Instance
+    16. Memperbaiki Bugs
+    17. Process Manager
+    18. Ikhtisar
+6. Mengonsumsi dan Menguji RESTful API menggunakan Postman (5 Jam)
+    1. Pendahuluan Mengonsumsi dan Menguji RESTful API menggunakan Postman
+    2. Postman
+    3. Memasang Postman
+    4. Komponen UI Postman
+    5. Menambah Catatan Baru
+    6. Mendapatkan Seluruh Catatan yang Disimpan
+    7. Mendapatkan Catatan Secara Spesifik
+    8. Mengubah Catatan
+    9. Menghapus Catatan
+    10. Pengujian Otomatis menggunakan Postman
+    11. Postman Collection
+    12. Postman Environment
+    13. Skenario Pengujian Otomatis
+    14. Membuat Collection dan Environment
+    15. Skenario Adding Notes
+    16. Skenario Getting All Notes
+    17. Skenario Getting Specified Note
+    18. Skenario Update Note
+    19. Skenario Delete Note
+    20. Menjalankan Seluruh Permintaan pada Collection
+    21. Ikhtisar
+7. Penutup
+    1. Submission Bookshelf API

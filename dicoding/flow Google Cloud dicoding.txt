@@ -1,0 +1,16 @@
+Dasar : 
+1. Belajar dasar google cloud
+2. cloud practitioner essensials (belajar dasar AWS cloud)
+3. belajar dasar dasar azure cloud
+Pemula :
+1. Belajar membuat aplikasi back end untuk pemula dengan google cloud
+2. Architecting on AWS (Membangun arsitektur cloud di AWS)
+3. Menjadi google cloud engineer
+4. Menjadi Azure cloud developer
+Menengah :
+1. Menjadi google cloud Architect
+2. Architecting on AWS (Membangun arsitektur cloud di AWS)
+3. Menjadi google cloud engineer
+4. Simulasi Ujian Associate Cloud Engineer
+5. Menjadi Azure cloud developer
+

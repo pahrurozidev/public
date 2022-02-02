@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: cornflowerblue;
+}
+
+main {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+p {
+  font-size: 2em;
+  color: white;
+}
+
+.data {
+  letter-spacing: .2em;
+}
+
+.tag {
+  font-size: 2.5em;
+}
+
+section {
+  margin-bottom: 2em;
+}
+
+button {
+  width: 6em;
+  height: 3em;
+  margin: auto;
+}
+
+input {
+  width: 15em;
+  padding: 0.5em;
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+  border: 0.2em solid black;
+}
+
+.btn-ok {
+  height: 2.55em;
+  width: 3em;
+  margin-left: -.5em;
+  border: 0.2em solid black;
+  border-bottom-right-radius: 1em;
+  border-top-right-radius: 1em;
+  cursor: pointer;
+  background: white;
+}
+
+

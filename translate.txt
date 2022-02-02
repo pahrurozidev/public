@@ -1,0 +1,126 @@
+heard/mendengar
+have heard/pernah mendengar
+term/istilah
+similar/mirip
+except/kecuali
+instead/sebaliknya
+through/melalui
+useful/berguna
+represent/mewakili
+here's/berikut adalah
+sample/contoh
+such as/seperti
+even/bahkan
+omit/menghilangkan
+follows/berikut
+legs/kaki
+tails/ekor
+these/ini
+whatever/apapun
+as long/selama
+ahead/depan
+ahead of time/sebelumnya
+would/akan
+shirt/baju
+shoes/sepatu
+still/masih
+respectively/masing masing
+a lookup/sebuah pencarian
+during/selama
+collected/dikumpulkan
+around/sekitar
+any time/setiap saat
+just like/sama seperti
+let's look/mari kita lihat
+particularly/terutama
+either/baik
+bark/kulit
+thought/pikiran
+tabular/tabel
+chain/rantai
+certain/pasti
+limited/terbatas
+range/lingkup
+reverse/mundur
+alphabet/abjad
+determine/menentukan
+passed/berlalu
+arbitrary/sembarang
+various/bermacam macam
+pieces/potongan
+nested/bersarang
+records/catatan
+interchange/persimpangan
+less/kurang
+unless/kecuali
+here is/berikut adalah
+otherwise/sebaliknya
+earlier/awal
+as/seperti
+contain/mengandung
+similar/mirip
+several/beberapa
+entire/seluruh
+isn't/tidak
+longer/lagi
+descending/turun
+ascending/naik
+odd/gajil
+even/bahkan
+increment/tambah
+count/hitung
+backward/mundur
+common/biasanya
+terminates/berakhir
+attemp/upaya
+directly/langsung
+matter/masalah
+essentially/pada dasarnya
+ensure/memastikan
+notice/perhatikan
+rewrite/menulis ulang
+never/tidak pernah
+never need/tidak perlu
+at this/pada saat ini
+actual/sebenarnya
+correspond/sesuai
+inclusive/termasuk
+exclusive/tidak termasuk
+thus/sehingga
+instead/sebaliknya
+whole/seluruh
+great/hebat
+Random Whole Numbers/bilangan bulat acak
+actually/sebenarnya
+putting/menempatkan
+range/lingkup
+instead/sebaliknya
+generating/menghasilkan
+formula/rumus
+we'll/kami akan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
